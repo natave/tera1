@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING/DTD BEAN//EN"
+	"http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<bean id="agreementsArchiveMove" class="com.its.tera.job.AgreementsArchiveMove" >
+      
+      <property name="services">
+         <ref bean="ServiceRegistry" />
+      </property>
+      <property name="appParameters" ref="appParameters" />
+      <property name="ITSServiceSoapProxy" ref="ITSServiceSoapProxy" />
+    
+      <!-- <property name="nodeService">
+         <ref bean="nodeService" />
+      </property>
+      <property name="fileFolderService">
+      	  <ref bean="fileFolderService"/>
+      </property>
+       
+      <property name="searchService" >
+         <ref bean="searchService" />
+      </property> -->
+           
+   </bean>
+   
+   <bean id="agreementsArchiveMoveSchedulerAccessor" class="org.alfresco.schedule.AlfrescoSchedulerAccessorBean">
+        <property name="scheduler" ref="schedulerFactory"/>
+        <property name="triggers">
+            <list>
+                <bean id="feedCleanerTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+                    <property name="cronExpression" value="0 0 23 * * ? *"/>
+                    <!-- <property name="cronExpression" value="${activities.feed.cleaner.cronExpression}"/>
+                    <property name="startDelay" value="${activities.feed.cleaner.startDelayMilliseconds}"/> -->
+                    <property name="jobDetail" ref="agreementsArchiveMoveJobDetail"/>
+                </bean>
+            </list>
+        </property>
+        <!-- <property name="enabled" value="${activities.feed.cleaner.enabled}" /> -->
+    </bean>
+
+    <bean id="agreementsArchiveMoveJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="com.its.tera.job.ArchiveAgreementsJob"/>
+        <property name="jobDataAsMap">
+            <map>
+                <entry key="agreementsArchiveMove" value-ref="agreementsArchiveMove"/>
+            </map>
+        </property>
+    </bean>
+   
+   
+   
+   
+   
+   
+   <!-- PREPARE FOR ARCHIVE BY TERA SERVICE -->
+   
+   
+   
+	<bean id="agreementsArchivePrepare" class="com.its.tera.job.prepare.AgreementsArchivePrepare" >
+      
+      <property name="services">
+         <ref bean="ServiceRegistry" />
+      </property>
+      <property name="appParameters" ref="appParameters" />
+      <property name="ITSServiceSoapProxy" ref="ITSServiceSoapProxy" />
+           
+   </bean>
+   
+   <bean id="agreementsArchivePrepareSchedulerAccessor" class="org.alfresco.schedule.AlfrescoSchedulerAccessorBean">
+        <property name="scheduler" ref="schedulerFactory"/>
+        <property name="triggers">
+            <list>
+                <bean id="agreementsArchivePrepareTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+                    <property name="cronExpression" value="0 40 22 * * ? *"/>
+                    <!-- <property name="cronExpression" value="${activities.feed.cleaner.cronExpression}"/>
+                    <property name="startDelay" value="${activities.feed.cleaner.startDelayMilliseconds}"/> -->
+                    <property name="jobDetail" ref="agreementsArchivePrepareJobDetail"/>
+                </bean>
+            </list>
+        </property>
+        <!-- <property name="enabled" value="${activities.feed.cleaner.enabled}" /> -->
+    </bean>
+
+    <bean id="agreementsArchivePrepareJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="com.its.tera.job.prepare.PrepareAgreementsJob"/>
+        <property name="jobDataAsMap">
+            <map>
+                <entry key="agreementsArchivePrepare" value-ref="agreementsArchivePrepare"/>
+            </map>
+        </property>
+    </bean>
+   
+   
+   
+   
+   
+   
+    <!-- SEND TO ARCHIVE PREPARED AGREEMENTS  -->
+    
+    
+    
+    
+    
+    <!-- es  -->
+    
+    <!-- <bean id="agreementsArchiveSend" class="com.its.tera.job.send.AgreementsArchiveSend" >
+      
+      <property name="services">
+         <ref bean="ServiceRegistry" />
+      </property>
+      <property name="appParameters" ref="appParameters" />
+           
+   </bean>
+   
+   <bean id="agreementsArchiveSendSchedulerAccessor" class="org.alfresco.schedule.AlfrescoSchedulerAccessorBean">
+        <property name="scheduler" ref="schedulerFactory"/>
+        <property name="triggers">
+            <list>
+                <bean id="agreementsArchiveSendTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+                    <property name="cronExpression" value="0 27 22 * * ? *"/>
+                    <property name="cronExpression" value="0 0/10 * * * ? *"/>
+                    <property name="jobDetail" ref="agreementsArchiveSendJobDetail"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="agreementsArchiveSendJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="com.its.tera.job.send.SendToArchiveAgreementsJob"/>
+        <property name="jobDataAsMap">
+            <map>
+                <entry key="agreementsArchiveSend" value-ref="agreementsArchiveSend"/>
+            </map>
+        </property>
+    </bean> -->
+   
+
+   
+   <!-- <bean id="agreementsArchiveMoveJobDetail" class="org.springframework.scheduling.quartz.JobDetailBean"> -->
+   <!-- <bean id="agreementsArchiveMoveJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass">
+            <value>com.its.tera.job.ArchiveAgreementsJob</value>
+        </property>
+        <property name="jobDataAsMap">
+            <map>
+                <entry key="agreementsArchiveMove">
+                    <ref bean="agreementsArchiveMove" />
+                </entry>
+            </map>
+        </property>
+    </bean> -->
+    
+   <!--  <bean id="agreementsArchiveMoveTrigger" class="org.alfresco.util.CronTriggerBean">
+     <bean id="agreementsArchiveMoveTrigger" class="org.alfresco.util.CronTriggerFactoryBean">
+        <property name="jobDetail">
+            <ref bean="agreementsArchiveMoveJobDetail" />
+        </property>
+        <property name="scheduler">
+            <ref bean="schedulerFactory" />
+        </property>
+        trigger at 4am each day <value>0 0 4 * * ?</value> 0 0/2 * * * ?
+        <property name="cronExpression">
+            <value>0 0 1 * * ?</value>
+            
+            <value>0 35 23 * * ?</value>
+            
+            <value>0 10 0,22 * * ? *</value>
+            <value>0 0 0,22 25 * ? *</value>
+            
+            
+            <value>0 0/20 * 1/1 * ? *</value>
+            <value>0 */15 * ? * *</value>
+            <value>0 0 21 * * ?</value>           
+            
+        </property>
+    </bean> -->
+</beans>

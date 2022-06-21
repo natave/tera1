@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.its.tera.mybatis.mappers.BranchMapper">
+
+	<resultMap id="branchesResultMap" type="com.its.tera.model.um.Group">
+		<id property="id" column="id" />
+		<result property="branchId"  column="branch_id"/>
+		<result property="name"  column="name"/>
+		<result property="title"  column="title"/>
+		<result property="status"  column="status"/>
+	</resultMap>
+	
+	<select id="selectBranches" resultMap="branchesResultMap">
+		SELECT branch_id, name, title, status FROM its_branches
+	</select>
+	
+	<select id="selectBranchesByBranchId" resultMap="branchesResultMap" parameterType="String">
+		SELECT branch_id, name, title, status FROM its_branches WHERE branch_id = #{branchId}
+	</select>
+	
+	<insert id="insertBranch" parameterType="com.its.tera.model.um.Group"  useGeneratedKeys="true" keyProperty="id">
+		INSERT its_branches (branch_id, name, title) VALUES (#{branchId}, #{name}, #{title})
+	</insert>
+	
+	<delete id="deleteBranch" parameterType="int">
+		DELETE FROM its_branches WHERE branch_id = #{branchId}
+	</delete>
+	
+	<update id="updateBranch" parameterType="com.its.tera.model.um.Group">
+		UPDATE its_branches SET name=#{name}, title=#{title}, status=#{status}  WHERE branch_id = #{branchId}
+	</update>
+
+</mapper>

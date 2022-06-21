@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<webscript>
+	<shortname>Block or Unblock Branch</shortname>
+	<description>Block or Unblock Branch</description>
+	<url>/tera/um/branch/{block}</url>
+	<authentication>user</authentication>
+	<format default="json"></format>
+	<family>tera</family>
+</webscript>

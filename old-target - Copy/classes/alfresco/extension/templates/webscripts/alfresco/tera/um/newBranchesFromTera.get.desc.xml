@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<webscript>
+	<shortname>GET New Branches From Tera</shortname>
+	<description>GET New Branches From Tera</description>
+	<url>/tera/um/get/new/branches</url>
+	<authentication>user</authentication>
+	<format default="json"></format>
+	<family>tera</family>
+</webscript>

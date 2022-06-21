@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<webscript>
+	<shortname>Update Correspondence Type</shortname>
+	<description>Update Correspondence Type</description>
+	<url>/tera/db/update/corrtype</url>
+	<authentication>user</authentication>
+	<format default="json"></format>
+	<family>tera</family>
+</webscript>

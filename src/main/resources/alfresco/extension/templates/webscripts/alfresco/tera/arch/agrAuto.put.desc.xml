@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<webscript>
+	<shortname>Prepare Agreements For Archive AUTO</shortname>
+	<description>Prepare Agreements For Archive AUTO</description>
+	<url>/tera/arch/agr/auto</url>
+	<authentication>user</authentication>
+	<format default="json"></format>
+	<family>tera</family>
+</webscript>

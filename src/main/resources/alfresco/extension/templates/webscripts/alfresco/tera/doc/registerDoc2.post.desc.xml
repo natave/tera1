@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<webscript>
+	<shortname>Register Document2</shortname>
+	<description>Register Document2</description>
+	<url>/tera/doc/register2</url>
+	<!-- turn off the multipart formdata processing -->
+	<formdata multipart-processing="false" />
+	<authentication>user</authentication>
+	<format default="json"></format>
+	<family>tera</family>
+</webscript>

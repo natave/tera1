@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<webscript>
+	<shortname>Delete Corr Type</shortname>
+	<description>Delete Corr Type</description>
+	<url>/tera/db/delete/corrtype</url>
+	<authentication>user</authentication>
+	<format default="json"></format>
+	<family>tera</family>
+</webscript>

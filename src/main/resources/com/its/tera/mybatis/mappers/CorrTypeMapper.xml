@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.its.tera.mybatis.mappers.CorrTypeMapper">
+
+	<resultMap id="corrTypeResultMap" type="com.its.tera.model.db.CorrType">
+		<id property="id" column="id" />
+		<result property="name"  column="name"/>
+		<result property="status"  column="status"/>
+	</resultMap>
+	
+	<select id="selectCorrTypes" resultMap="corrTypeResultMap">
+		SELECT id, name, status FROM its_correspondence_type WHERE status != -1
+	</select>
+	
+	<select id="selectCorrTypeByName" resultMap="corrTypeResultMap" parameterType="String">
+		SELECT id, name, status FROM its_correspondence_type WHERE name = #{name}
+	</select>
+	
+	<insert id="insertCorrType" parameterType="com.its.tera.model.db.CorrType"  useGeneratedKeys="true" keyProperty="id">
+		INSERT its_correspondence_type (name) VALUES (#{name})
+	</insert>
+	
+	<delete id="deleteCorrType" parameterType="int">
+		DELETE FROM its_correspondence_type WHERE id = #{id}
+	</delete>
+	
+	<update id="updateCorrType" parameterType="com.its.tera.model.db.CorrType">
+		UPDATE its_correspondence_type SET name=#{name} WHERE id = #{id}
+	</update>
+
+</mapper>

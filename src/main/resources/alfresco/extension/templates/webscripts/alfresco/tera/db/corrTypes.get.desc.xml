@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<webscript>
+	<shortname>GET Corr Types List</shortname>
+	<description>GET Corr Types List</description>
+	<url>/tera/db/get/corrtype</url>
+	<authentication>user</authentication>
+	<format default="json"></format>
+	<family>tera</family>
+</webscript>

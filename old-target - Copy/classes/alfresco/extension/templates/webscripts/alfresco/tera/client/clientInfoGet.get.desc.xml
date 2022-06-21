@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<webscript>
+	<shortname>GET Client info</shortname>
+	<description>GET Client info</description>
+	<url>/tera/client/info/{code}/{ref}</url>
+	<authentication>user</authentication>
+	<format default="json"></format>
+	<family>tera</family>
+</webscript>

@@ -1,0 +1,463 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+	Licensed to the Apache Software Foundation (ASF) under one or more
+	contributor license agreements.  See the NOTICE file distributed with
+	this work for additional information regarding copyright ownership.
+	The ASF licenses this file to You under the Apache License, Version 2.0
+	(the "License"); you may not use this file except in compliance with
+	the License.  You may obtain a copy of the License at
+	
+	http://www.apache.org/licenses/LICENSE-2.0
+	
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<!-- <bean id="webscript.alfresco.tutorials.helloworld.get"
+		  class="com.its.tera.platformsample.HelloWorldWebScript"
+		  parent="webscript">
+	</bean> -->
+	
+	
+	
+	<!-- 
+	
+	 WS
+	 
+	 -->
+	
+	<!-- Base web script for Sign -->
+	<bean id="webscript.alfresco.tera.base" class="com.its.tera.ws.RootWebScript">
+		<property name="serviceRegistry" ref="ServiceRegistry" />
+		<!-- <property name="activitiHelper" ref="itsActivitiHelper" /> -->
+	</bean>
+	
+	<!-- Login -->
+	<bean id="webscript.alfresco.login.post" class="com.its.tera.ws.LoginService"
+		parent="webscript">
+		<property name="serviceRegistry" ref="ServiceRegistry" />
+		<!-- <property name="transactionService" ref="transactionService" /> -->
+		<property name="eventPublisher" ref="eventPublisher" />
+		<property name="appParameters" ref="appParameters" />
+		<property name="dbServiceBean" ref="dbServiceBean" />
+	</bean>	
+	
+	<!-- Logout -->
+	<bean id="webscript.alfresco.loginticket.delete" class="com.its.tera.ws.LoginTicketDelete"
+		parent="webscript">
+		<property name="authenticationService" ref="AuthenticationService" />
+		<property name="ticketComponent" ref="ticketComponent" />
+	</bean>
+	
+	<!-- delete node -->
+	<bean id="webscript.alfresco.tera.deleteNode.delete" class="com.its.tera.ws.DeleteNode"
+		parent="webscript.alfresco.tera.base">
+	</bean>
+	
+	
+	
+	<!-- 
+	
+	CLIENT
+	
+	 -->
+	
+	<!-- Register Client -->
+	<bean id="webscript.alfresco.tera.client.registerClient.post" class="com.its.tera.ws.client.ClientReg"
+		parent="webscript.alfresco.tera.base">	
+	</bean>
+	
+	<!-- Get Client Info -->
+	<bean id="webscript.alfresco.tera.client.clientInfoGet.get" class="com.its.tera.ws.client.GetClientInfo"
+		parent="webscript.alfresco.tera.base">
+		<property name="appParameters" ref="appParameters" />
+	</bean>
+	
+	<!-- Register Legal Doc -->
+	<bean id="webscript.alfresco.tera.client.registerLegalFolder.post" class="com.its.tera.ws.client.LegalFolderRegistration"
+		parent="webscript.alfresco.tera.base">	
+	</bean>
+	
+	<!-- Get Searched Clients -->
+	<bean id="webscript.alfresco.tera.client.searchForClient.get" class="com.its.tera.ws.client.SearchForClient"
+		parent="webscript.alfresco.tera.base">
+		<property name="appParameters" ref="appParameters" />
+		<property name="ITSServiceSoapProxy" ref="ITSServiceSoapProxy" />
+	</bean>
+	
+	<!-- Get Searched Clients -->
+	<bean id="webscript.alfresco.tera.client.searchForClient2.get" class="com.its.tera.ws.client.SearchForClient2"
+		parent="webscript.alfresco.tera.base">
+		<property name="appParameters" ref="appParameters" />
+		<!-- <property name="ITSServiceSoapProxy" ref="ITSServiceSoapProxy" /> -->
+	</bean>
+	
+	
+	
+	<!-- 
+	
+	AGREEMENT
+	
+	 -->
+	
+	
+	<!-- Register General Agreement -->
+	<bean id="webscript.alfresco.tera.ag.registerGAgr.post" class="com.its.tera.ws.ag.GAgrReg"
+		parent="webscript.alfresco.tera.base">	
+	</bean>
+	
+	<!-- Register Agreement -->
+	<bean id="webscript.alfresco.tera.ag.registerAgr.post" class="com.its.tera.ws.ag.AgrReg"
+		parent="webscript.alfresco.tera.base">	
+	</bean>	
+	
+	<!-- Get General Agreement From Tera-->
+	<bean id="webscript.alfresco.tera.ag.gAgrFromTera.get" class="com.its.tera.ws.ag.GetGAgreementFromTera"
+		parent="webscript.alfresco.tera.base">
+		<property name="appParameters" ref="appParameters" />
+		<property name="ITSServiceSoapProxy" ref="ITSServiceSoapProxy" />
+	</bean>
+	
+	<!-- Get Agreement From Tera-->
+	<bean id="webscript.alfresco.tera.ag.agrFromTera.get" class="com.its.tera.ws.ag.GetAgreementFromTera"
+		parent="webscript.alfresco.tera.base">
+		<property name="appParameters" ref="appParameters" />
+		<property name="ITSServiceSoapProxy" ref="ITSServiceSoapProxy" />
+	</bean>
+	
+	<!-- Get General Agreement From Tera 2-->
+	<bean id="webscript.alfresco.tera.ag.gAgrFromTera2.get" class="com.its.tera.ws.ag.GetGAgreementFromTera2"
+		parent="webscript.alfresco.tera.base">
+		<property name="appParameters" ref="appParameters" />
+	</bean>
+	
+	<!-- Get Agreement From Tera 2-->
+	<bean id="webscript.alfresco.tera.ag.agrFromTera2.get" class="com.its.tera.ws.ag.GetAgreementFromTera2"
+		parent="webscript.alfresco.tera.base">
+		<property name="appParameters" ref="appParameters" />
+	</bean>
+	
+	
+	
+	
+	
+	<!-- 
+	
+	DOCUMENTS
+	
+	 -->
+	
+	
+	
+	<!-- Register Document -->
+	<bean id="webscript.alfresco.tera.doc.registerDoc.post" class="com.its.tera.ws.doc.DocReg"
+		parent="webscript.alfresco.tera.base">
+		<property name="appParameters" ref="appParameters" />
+	</bean>
+	
+	<!-- Register Document -->
+	<bean id="webscript.alfresco.tera.doc.registerDoc2.post" class="com.its.tera.ws.doc.DocReg2"
+		parent="webscript.alfresco.tera.base">
+		<property name="appParameters" ref="appParameters" />
+	</bean>
+	
+	<!-- Register multiple Documents -->
+	<bean id="webscript.alfresco.tera.doc.registerMultipleDocs.post" class="com.its.tera.ws.doc.RegisterMultiplePDFs"
+		parent="webscript.alfresco.tera.base">
+		<property name="appParameters" ref="appParameters" />
+	</bean>
+	
+	<!-- Move Document -->
+	<bean id="webscript.alfresco.tera.doc.moveDoc.put" class="com.its.tera.ws.doc.MoveDocument"
+		parent="webscript.alfresco.tera.base">
+		<property name="appParameters" ref="appParameters" />
+	</bean>
+	
+	<!-- Update Content -->
+	<bean id="webscript.alfresco.tera.doc.updateContent.put" class="com.its.tera.ws.doc.UpdateContent"
+		parent="webscript.alfresco.tera.base">
+		<property name="appParameters" ref="appParameters" />
+	</bean>
+	
+	<!-- Update Content2 -->
+	<bean id="webscript.alfresco.tera.doc.updateContent2.post" class="com.its.tera.ws.doc.UpdateContent2"
+		parent="webscript.alfresco.tera.base">
+		<property name="appParameters" ref="appParameters" />
+	</bean>
+	
+	<!-- Update Document -->
+	<bean id="webscript.alfresco.tera.doc.updateDoc.put" class="com.its.tera.ws.doc.UpdateDocument"
+		parent="webscript.alfresco.tera.base">
+		<property name="appParameters" ref="appParameters" />
+	</bean>
+	
+	<!-- Update Documents name by mimetype -->
+	<bean id="webscript.alfresco.tera.doc.docMimeType.put" class="com.its.tera.ws.doc.DocMimeType"
+		parent="webscript.alfresco.tera.base">
+	</bean>
+	
+	<!-- Update Documents name, replace '+' symbols -->
+	<bean id="webscript.alfresco.tera.doc.changeDocName.put" class="com.its.tera.ws.doc.ChangeDocName"
+		parent="webscript.alfresco.tera.base">
+	</bean>
+	
+		
+	
+	<!-- 
+	
+	SCAN
+	
+	 -->
+	
+	
+	<!-- Get Scanned PDF-s -->
+	<bean id="webscript.alfresco.tera.scan.scannedPDF.get" class="com.its.tera.ws.scan.GetScannedPDFs"
+		parent="webscript.alfresco.tera.base">
+		<property name="appParameters" ref="appParameters" />
+	</bean>
+	
+	<!-- Update Content From scanneds -->
+	<bean id="webscript.alfresco.tera.scan.updateFromScan.put" class="com.its.tera.ws.scan.UpdateContentFromScan"
+		parent="webscript.alfresco.tera.base">
+		<property name="appParameters" ref="appParameters" />
+	</bean>
+	
+	<!-- Delete Scanneds -->
+	<bean id="webscript.alfresco.tera.scan.deleteScans.put" class="com.its.tera.ws.scan.DeleteScans"
+		parent="webscript.alfresco.tera.base">
+	</bean>
+	
+	
+		
+	<!-- 
+	
+	USER MANAGEMENT
+	
+	 -->
+	
+	
+	<!-- Add or Remove User From Group -->
+	<bean id="webscript.alfresco.tera.um.addRemoveFromGroup.put" class="com.its.tera.ws.um.AddRemoveFromGroup"
+		parent="webscript.alfresco.tera.base">
+		<property name="appParameters" ref="appParameters" />
+	</bean>
+		
+	<!-- Block or Unblock Branch -->
+	<bean id="webscript.alfresco.tera.um.branchBlockUnblock.put" class="com.its.tera.ws.um.BranchBlockUnblock"
+		parent="webscript.alfresco.tera.base">
+		<property name="dbServiceBean" ref="dbServiceBean" />
+		<property name="appParameters" ref="appParameters" />
+	</bean>
+	
+	<!-- Create Branch -->
+	<bean id="webscript.alfresco.tera.um.createBranch.post" class="com.its.tera.ws.um.CreateBranch"
+		parent="webscript.alfresco.tera.base">
+		<property name="dbServiceBean" ref="dbServiceBean" />
+		<property name="appParameters" ref="appParameters" />
+	</bean>	
+	
+	<!-- GET Groups And Users -->
+	<bean id="webscript.alfresco.tera.um.groupsAndUsers.get" class="com.its.tera.ws.um.GetGroupsAndUsers"
+		parent="webscript.alfresco.tera.base">
+		<property name="dbServiceBean" ref="dbServiceBean" />
+	</bean>
+	
+	<!-- GET New Branches From Tera -->
+	<bean id="webscript.alfresco.tera.um.newBranchesFromTera.get" class="com.its.tera.ws.um.GetNewBranchesFromTera"
+		parent="webscript.alfresco.tera.base">
+		<property name="appParameters" ref="appParameters" />
+		<property name="ITSServiceSoapProxy" ref="ITSServiceSoapProxy" />
+	</bean>
+	
+	<bean id="webscript.alfresco.tera.um.newBranchesFromTera2.get" class="com.its.tera.ws.um.GetNewBranchesFromTera2"
+		parent="webscript.alfresco.tera.base">
+		<property name="appParameters" ref="appParameters" />
+		<!-- <property name="ITSServiceSoapProxy" ref="ITSServiceSoapProxy" /> -->
+	</bean>
+	
+	<!-- GET Searched Users -->
+	<bean id="webscript.alfresco.tera.um.searchUsers.get" class="com.its.tera.ws.um.UsersSearch"
+		parent="webscript.alfresco.tera.base">
+	</bean>
+	
+	
+	<!-- Create Branch -->
+	<bean id="webscript.alfresco.tera.um.syncGroupUsers.post" class="com.its.tera.ws.um.SyncGroupUsers"
+		parent="webscript.alfresco.tera.base">
+		<property name="appParameters" ref="appParameters" />
+	</bean>	
+	
+	
+	
+	<!-- 
+	
+	DATABASE
+	
+	 -->
+	 
+	 
+	 <!-- Add Correspondence Type -->
+	<bean id="webscript.alfresco.tera.db.addCorrType.post" class="com.its.tera.ws.db.AddCorrespondenceType"
+		parent="webscript.alfresco.tera.base">
+		<property name="dbServiceBean" ref="dbServiceBean" />
+	</bean>
+	 
+	 <!-- Delete Correspondence Type -->
+	<bean id="webscript.alfresco.tera.db.deleteCorrType.delete" class="com.its.tera.ws.db.DeleteCorrespondenceType"
+		parent="webscript.alfresco.tera.base">
+		<property name="dbServiceBean" ref="dbServiceBean" />
+	</bean>
+	
+	<!-- GET Correspondence Types List -->
+	<bean id="webscript.alfresco.tera.db.corrTypes.get" class="com.its.tera.ws.db.GetCorrespondenceTypes"
+		parent="webscript.alfresco.tera.base">
+		<property name="dbServiceBean" ref="dbServiceBean" />
+	</bean>
+	
+	<!-- GET Currency List -->
+	<bean id="webscript.alfresco.tera.db.currency.get" class="com.its.tera.ws.db.GetCurrencyList"
+		parent="webscript.alfresco.tera.base">
+		<property name="dbServiceBean" ref="dbServiceBean" />
+	</bean>
+		
+	<!-- Update Correspondence Type -->
+	<bean id="webscript.alfresco.tera.db.updateCorrType.put" class="com.its.tera.ws.db.UpdateCorrespondenceType"
+		parent="webscript.alfresco.tera.base">
+		<property name="dbServiceBean" ref="dbServiceBean" />
+	</bean>
+	 
+	 
+	 
+	 
+	 
+	 <!--
+	 
+	   SEARCH 
+	   
+	 -->
+	 
+	<!-- Search Docs Get  -->
+	<bean id="webscript.alfresco.tera.search.searchDocs.get" class="com.its.tera.ws.search.SearchDocs"
+		parent="webscript.alfresco.tera.base">
+		<property name="appParameters" ref="appParameters" />
+	</bean>
+	
+	<!-- Search Agreements Get  -->
+	<bean id="webscript.alfresco.tera.search.searchAgreements.get" class="com.its.tera.ws.search.SearchAgreements"
+		parent="webscript.alfresco.tera.base">
+		<property name="appParameters" ref="appParameters" />
+	</bean>
+	
+	<!-- Search Clients Get  -->
+	<bean id="webscript.alfresco.tera.search.searchClients.get" class="com.its.tera.ws.search.SearchClients"
+		parent="webscript.alfresco.tera.base">
+		<property name="appParameters" ref="appParameters" />
+	</bean>
+	
+	
+	
+	 <!--
+	 
+	   ARCHIVE 
+	   
+	 -->
+	 
+	 <!-- Archive Agreements  -->
+	<bean id="webscript.alfresco.tera.arch.archiveAgreements.post" class="com.its.tera.ws.arch.ArchiveAgreements"
+		parent="webscript.alfresco.tera.base">
+		<property name="appParameters" ref="appParameters" />
+	</bean>
+	 
+	<!-- Prepare Agreements For Archive  -->
+	<bean id="webscript.alfresco.tera.arch.prepareForArchive.put" class="com.its.tera.ws.arch.PrepareForArchive"
+		parent="webscript.alfresco.tera.base">
+	</bean>
+	
+	<!-- Remove Agreements From Prepared For Archive  -->
+	<bean id="webscript.alfresco.tera.arch.removeForArchive.put" class="com.its.tera.ws.arch.RemoveForArchive"
+		parent="webscript.alfresco.tera.base">
+	</bean>
+	
+	<!-- Get Client NodeRef For Archive  -->
+	<bean id="webscript.alfresco.tera.arch.clientRef.get" class="com.its.tera.ws.arch.GetClientRef"
+		parent="webscript.alfresco.tera.base">
+	</bean>
+	
+	<!-- Get U T Info  -->
+	<bean id="webscript.alfresco.tera.arch.utGet.get" class="com.its.tera.ws.arch.GetUTInfo"
+		parent="webscript.alfresco.tera.base">
+		<property name="ticketComponent" ref="ticketComponent" />
+	</bean>
+	
+	
+	
+	
+	
+	<!-- AUTO Agreements Prepared For Archive  -->
+	<bean id="webscript.alfresco.tera.arch.agrAuto.put" class="com.its.tera.ws.arch.LoansForArchAuto"
+		parent="webscript.alfresco.tera.base">
+		<property name="appParameters" ref="appParameters" />
+		<property name="ITSServiceSoapProxy" ref="ITSServiceSoapProxy" />
+	</bean>
+	
+	
+	<!-- AUTO G Agreements Prepared For Archive  -->
+	<bean id="webscript.alfresco.tera.arch.genAuto.put" class="com.its.tera.ws.arch.GAgreementForArchAuto"
+		parent="webscript.alfresco.tera.base">
+		<property name="appParameters" ref="appParameters" />
+		<property name="ITSServiceSoapProxy" ref="ITSServiceSoapProxy" />
+	</bean>
+	
+	
+	
+	 <!--
+	 
+	   ARCHIVE RETURN/REG (not front)
+	   
+	 -->
+	 	 
+	 
+	 <!-- RETURN/Register General Agreement -->
+	<bean id="webscript.alfresco.tera.arch.reg.registerGAgr.post" class="com.its.tera.ws.arch.reg.GAgrReg"
+		parent="webscript.alfresco.tera.base">	
+	</bean>
+	
+	<!-- RETURN/Register Agreement -->
+	<bean id="webscript.alfresco.tera.arch.reg.registerAgr.post" class="com.its.tera.ws.arch.reg.AgrReg"
+		parent="webscript.alfresco.tera.base">	
+	</bean>	
+	 
+	 <!-- RETURN/Register Document -->
+	<bean id="webscript.alfresco.tera.arch.reg.registerDoc.post" class="com.its.tera.ws.arch.reg.DocReg"
+		parent="webscript.alfresco.tera.base">
+		<property name="appParameters" ref="appParameters" />
+	</bean>
+	
+	
+	
+	
+	<!--
+	
+	REPORTING 
+	
+	-->
+	
+	<!-- POST run report -->
+	<bean id="webscript.alfresco.tera.reports.reportRun.post" class="com.its.tera.ws.reports.ReportRun"
+		parent="webscript.alfresco.tera.base">
+		<property name="appParameters" ref="appParameters" />
+		<property name="dbServiceBean" ref="dbServiceBean" />
+		<property name="birtReportingEngine" ref="birtReportingEngine" />
+	</bean>	
+	
+	
+	
+	
+	
+</beans>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.its.mybatis.mappers.ClientsTempTableMapper">
+
+	<resultMap id="ClientsTempTableResultMap" type="com.its.shared.models.Client">
+		<id property="id"  column="id"/>
+		<result property="reportId"  column="report_id"/>
+		<result property="nodeRef"  column="node_ref"/>
+		
+		<result property="clientCode"  column="client_code"/>
+		<result property="clientName"  column="client_name"/>
+		<result property="clientId"  column="client_id"/>	
+		
+		<result property="created"  column="created"/>
+		<result property="creator"  column="creator"/>
+		<result property="edited"  column="edited"/>
+		<result property="editor"  column="editor"/>
+		<result property="isEmpty" column="isEmpty"/>					
+		
+	</resultMap>
+	
+	<select id="selectClientsTempDataResults" parameterType="map" resultMap="ClientsTempTableResultMap">
+		SELECT node_ref, 
+			   client_code, 
+			   client_name, 
+			   client_id,
+			   created, 
+			   creator, 
+			   edited, 
+			   editor,
+			   isEmpty
+		FROM its_clients_temp_table 
+		WHERE report_id = #{reportId}
+	</select>
+	
+	<insert id="insertClientsTempDataForReport" parameterType="com.its.shared.models.Client" useGeneratedKeys="true" keyProperty="id">
+		INSERT its_clients_temp_table (report_id, 
+							   node_ref, 
+							   client_code, 
+							   client_name, 
+							   client_id, 
+							   created, 
+							   creator, 
+							   edited, 
+							   editor,
+							   isEmpty)
+		VALUES (#{reportId}, 
+				#{nodeRef}, 
+				#{clientCode}, 
+				#{clientName}, 
+				#{clientId},
+			   	#{created}, 
+			   	#{creator}, 
+			   	#{edited}, 
+			   	#{editor},
+			   	#{isEmpty})
+	</insert>
+	
+	<delete id="clearClientsTempData">
+		DELETE FROM its_clients_temp_table
+	</delete>
+	
+	<delete id="deleteClientsTempDataByReportId" parameterType="map">
+		DELETE FROM its_clients_temp_table WHERE report_id = #{reportId}
+	</delete>
+	
+
+</mapper>

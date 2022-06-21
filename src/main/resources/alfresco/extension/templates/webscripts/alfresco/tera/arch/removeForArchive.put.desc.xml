@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<webscript>
+	<shortname>Remove Agreements From Prepared For Archive</shortname>
+	<description>Remove Agreements From Prepared For Archive</description>
+	<url>/tera/arch/prepare/remove</url>
+	<authentication>user</authentication>
+	<format default="json"></format>
+	<family>tera</family>
+</webscript>

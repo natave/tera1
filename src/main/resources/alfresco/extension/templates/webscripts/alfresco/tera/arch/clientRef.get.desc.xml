@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<webscript>
+	<shortname>GET Client NodeRef</shortname>
+	<description>GET Client NodeRef</description>
+	<url>/tera/arch/client/ref/{code}</url>
+	<authentication>user</authentication>
+	<format default="json"></format>
+	<transaction allow="readonly">required</transaction>
+	<family>tera</family>
+</webscript>

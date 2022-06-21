@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<webscript>
+	<shortname>Archive Agreements</shortname>
+	<description>Archive Agreements</description>
+	<url>/tera/arch/archive/agreements</url>
+	<authentication>user</authentication>
+	<format default="json"></format>
+	<family>tera</family>
+</webscript>

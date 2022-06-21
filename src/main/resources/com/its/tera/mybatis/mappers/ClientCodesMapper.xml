@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.its.tera.mybatis.mappers.ClientCodesMapper">
+
+	<resultMap id="clientCodesResultMap" type="com.its.tera.model.db.ClientCodesModel">
+		<id property="id" column="id" />
+		<result property="code"  column="code"/>
+		<result property="status"  column="status"/>
+	</resultMap>
+	
+	<select id="selectClientCodes" resultMap="clientCodesResultMap">
+		SELECT id, code, status FROM its_client_codes
+	</select>
+	
+	<select id="selectCountClientCodes" parameterType="int">
+		SELECT COUNT(code) FROM its_client_codes WHERE status = #{status}
+	</select>
+	
+	<select id="selectActivTopClientCodes" resultMap="clientCodesResultMap" parameterType="int">
+		SELECT TOP (#{howMuch}) id, code, status FROM its_client_codes WHERE status = 0
+	</select>
+		
+	<select id="selectClientCodesById" resultMap="clientCodesResultMap" parameterType="int">
+		SELECT id, code, status FROM its_client_codes WHERE id = #{id}
+	</select>
+	
+	<select id="selectClientCodesByStatus" resultMap="clientCodesResultMap" parameterType="int">
+		SELECT id, code, status FROM its_client_codes WHERE status = #{status}
+	</select>
+	
+	<select id="selectClientCodesByCode" resultMap="clientCodesResultMap" parameterType="String">
+		SELECT id, code, status FROM its_client_codes WHERE code = #{code}
+	</select>
+	
+	<insert id="insertClientCodes" parameterType="com.its.tera.model.db.ClientCodesModel"  useGeneratedKeys="true" keyProperty="id">
+		INSERT its_client_codes (code) VALUES (#{code})
+	</insert>
+	
+	<delete id="deleteClientCodeByStatus" parameterType="int">
+		DELETE FROM its_client_codes WHERE status = #{status}
+	</delete>
+	
+	<update id="updateClientCodeById" parameterType="com.its.tera.model.db.ClientCodesModel">
+		UPDATE its_client_codes SET status=#{status} WHERE id = #{id}
+	</update>
+
+</mapper>

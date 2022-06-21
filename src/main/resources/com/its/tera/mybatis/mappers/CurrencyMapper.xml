@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.its.tera.mybatis.mappers.CurrencyMapper">
+
+	<resultMap id="currencyResultMap" type="com.its.tera.model.db.Currency">
+		<id property="id" column="id" />
+		<result property="name"  column="name"/>
+		<result property="status"  column="status"/>
+	</resultMap>
+	
+	<select id="selectCurrency" resultMap="currencyResultMap">
+		SELECT id, name, status FROM its_currency WHERE status != -1
+	</select>
+	
+	<select id="selectCurrencyByName" resultMap="currencyResultMap" parameterType="String">
+		SELECT id, name, status FROM its_currency WHERE name = #{name}
+	</select>
+	
+	<insert id="insertCurrency" parameterType="com.its.tera.model.db.Currency"  useGeneratedKeys="true" keyProperty="id">
+		INSERT its_currency (name) VALUES (#{name})
+	</insert>
+	
+	<delete id="deleteCurrency" parameterType="int">
+		DELETE FROM its_currency WHERE id = #{id}
+	</delete>
+	
+	<update id="updateCurrency" parameterType="com.its.tera.model.db.Currency">
+		UPDATE its_currency SET name=#{name} WHERE id = #{id}
+	</update>
+
+</mapper>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<webscript>
+	<shortname>Update Document Name</shortname>
+	<description>Update Document Name Replase '+' symbols</description>
+	<url>/tera/doc/update/name</url>
+	<authentication>user</authentication>
+	<format default="json"></format>
+	<family>tera</family>
+</webscript>

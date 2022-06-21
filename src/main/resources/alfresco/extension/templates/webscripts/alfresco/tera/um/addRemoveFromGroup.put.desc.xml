@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<webscript>
+	<shortname>Add or Remove User From Group</shortname>
+	<description>Add or Remove User From Group</description>
+	<url>/tera/um/manage/{add}</url>
+	<authentication>user</authentication>
+	<format default="json"></format>
+	<family>tera</family>
+</webscript>

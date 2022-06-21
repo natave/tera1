@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<webscript>
+	<shortname>Register Multiple Documents</shortname>
+	<description>Register Multiple Documents</description>
+	<url>/tera/doc/register/multiple</url>
+	<authentication>user</authentication>
+	<format default="json"></format>
+	<family>tera</family>
+</webscript>

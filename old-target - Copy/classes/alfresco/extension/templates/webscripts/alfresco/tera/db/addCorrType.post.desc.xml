@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<webscript>
+	<shortname>Add Correspondence Type</shortname>
+	<description>Add Correspondence Type</description>
+	<url>/tera/db/add/corrtype</url>
+	<authentication>user</authentication>
+	<format default="json"></format>
+	<family>tera</family>
+</webscript>

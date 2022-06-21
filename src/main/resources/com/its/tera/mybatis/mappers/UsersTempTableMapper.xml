@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.its.tera.mybatis.mappers.UsersTempTableMapper">
+
+	<resultMap id="UsersTempTableResultMap" type="com.its.tera.model.um.User">
+		<id property="id"  column="id"/>
+		<result property="reportId"  column="report_id"/>
+		
+		<result property="reportGroup"  column="group_name"/>
+		<result property="userName"  column="userName"/>
+		<result property="firstName"  column="firstName"/>
+		
+		<result property="lastName"  column="lastName"/>
+		<result property="jobTitle"  column="job_title"/>
+		
+		<result property="created"  column="created"/>					
+		
+	</resultMap>
+	
+	<select id="selectUsersTempDataResults" parameterType="map" resultMap="UsersTempTableResultMap">
+		SELECT group_name, 
+			   userName, 
+			   firstName, 
+			   lastName, 
+			   job_title, 
+			   created
+		FROM its_users_temp_table 
+		WHERE report_id = #{reportId}
+	</select>
+	
+	<insert id="insertUsersTempDataForReport" parameterType="com.its.tera.model.um.User" useGeneratedKeys="true" keyProperty="id">
+		INSERT its_users_temp_table (report_id, 
+							   group_name, 
+							   userName, 
+							   firstName, 
+							   lastName, 
+							   job_title, 
+							   created)
+		VALUES (#{reportId}, 
+				#{reportGroup}, 
+				#{userName}, 
+				#{firstName}, 
+				#{lastName}, 
+				#{jobTitle}, 
+				#{created})
+	</insert>
+	
+	<delete id="clearUsersTempData">
+		DELETE FROM its_users_temp_table
+	</delete>
+	
+	<delete id="deleteUsersTempDataByReportId" parameterType="map">
+		DELETE FROM its_users_temp_table WHERE report_id = #{reportId}
+	</delete>
+	
+
+</mapper>

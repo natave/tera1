@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<webscript>
+	<shortname>GET Groups And Users</shortname>
+	<description>GET Groups And Users</description>
+	<url>/tera/um/get/tree</url>
+	<authentication>user</authentication>
+	<format default="json"></format>
+	<family>tera</family>
+</webscript>

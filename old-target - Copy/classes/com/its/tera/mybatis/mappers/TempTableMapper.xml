@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.its.mybatis.mappers.TempTableMapper">
+
+	<resultMap id="TempTableResultMap" type="com.its.shared.models.Document">
+		<id property="id"  column="id"/>
+		<result property="reportId"  column="report_id"/>
+		<result property="nodeRef"  column="node_ref"/>
+		
+		<result property="clientCode"  column="client_code"/>
+		<result property="clientName"  column="client_name"/>
+		<result property="clientId"  column="client_id"/>
+		
+		<result property="regNumber"  column="doc_reg_num"/>
+		<result property="regDate"  column="doc_reg_date"/>
+		<result property="creatorUser"  column="creator_user"/>
+		<result property="corrType"  column="corr_type"/>
+		<result property="description"  column="doc_description"/>
+		<result property="VIP"  column="doc_is_vip"/>
+		<result property="status"  column="doc_status"/>		
+		
+		<result property="gagrId"  column="ga_id"/>
+		<result property="gagrNumber"  column="ga_number"/>
+		<result property="gagrDate"  column="ga_date"/>
+		<result property="gagrAmount"  column="ga_amount"/>
+		<result property="gagrCurrency"  column="ga_currency"/>
+		<result property="agrId"  column="a_id"/>
+		<result property="agrNumber"  column="a_number"/>
+		<result property="date"  column="a_date"/>
+		<result property="amount"  column="a_amount"/>
+		<result property="currency"  column="a_currency"/>
+		<result property="productType"  column="a_product"/>	
+		
+		<result property="created"  column="created"/>
+		<result property="creator"  column="creator"/>
+		<result property="edited"  column="edited"/>
+		<result property="editor"  column="editor"/>
+		<result property="browsURL"  column="browsURL"/>					
+		
+	</resultMap>
+	
+	<select id="selectTempDataResults" parameterType="map" resultMap="TempTableResultMap">
+		SELECT node_ref, 
+			   client_code, 
+			   client_name, 
+			   client_id, 
+			   doc_reg_num, 
+			   doc_reg_date, 
+			   creator_user, 
+			   corr_type, 
+			   doc_description, 
+			   doc_is_vip, 
+			   doc_status, 
+			   ga_id, 
+			   ga_number, 
+			   ga_date, 
+			   ga_amount, 
+			   ga_currency, 
+			   a_id, 
+			   a_number,
+			   a_date,
+			   a_amount, 
+			   a_currency, 
+			   a_product,
+			   created, 
+			   creator, 
+			   edited, 
+			   editor,
+			   browsURL
+		FROM its_temp_table 
+		WHERE report_id = #{reportId}
+	</select>
+	
+	<insert id="insertTempDataForReport" parameterType="com.its.shared.models.Document" useGeneratedKeys="true" keyProperty="id">
+		INSERT its_temp_table (report_id, 
+							   node_ref, 
+							   client_code, 
+							   client_name, 
+							   client_id, 
+							   doc_reg_num, 
+							   doc_reg_date, 
+							   creator_user, 
+							   corr_type, 
+							   doc_description, 
+							   doc_is_vip, 
+							   doc_status, 
+							   ga_id, 
+							   ga_number, 
+							   ga_date, 
+							   ga_amount, 
+							   ga_currency, 
+							   a_id, 
+							   a_number,
+							   a_date,
+							   a_amount, 
+							   a_currency, 
+							   a_product,
+							   created, 
+							   creator, 
+							   edited, 
+							   editor,
+							   browsURL)
+		VALUES (#{reportId}, 
+				#{nodeRef}, 
+				#{clientCode}, 
+				#{clientName}, 
+				#{clientId}, 
+				#{regNumber}, 
+				#{regDate}, 
+				#{creatorUser}, 
+				#{corrType},	
+				#{description}, 
+				#{VIP}, 
+				#{status}, 
+				#{gagrId}, 
+				#{gagrNumber}, 
+				#{gagrDate}, 
+				#{gagrAmount}, 
+				#{gagrCurrency}, 
+				#{agrId}, 
+				#{agrNumber}, 
+				#{date}, 
+				#{amount}, 
+				#{currency}, 
+				#{productType},
+			   	#{created}, 
+			   	#{creator}, 
+			   	#{edited}, 
+			   	#{editor},
+			   	#{browsURL})
+	</insert>
+	
+	<delete id="clearTempData">
+		DELETE FROM its_temp_table
+	</delete>
+	
+	<delete id="deleteTempDataByReportId" parameterType="map">
+		DELETE FROM its_temp_table WHERE report_id = #{reportId}
+	</delete>
+	
+
+</mapper>

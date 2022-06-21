@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<webscript>
+	<shortname>Delete Scanned Docs</shortname>
+	<description>Delete Scanned Docs</description>
+	<url>/tera/scan/delete</url>
+	<authentication>user</authentication>
+	<format default="json"></format>
+	<family>tera</family>
+</webscript>

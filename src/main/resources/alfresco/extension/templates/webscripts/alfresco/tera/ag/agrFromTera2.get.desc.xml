@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<webscript>
+	<shortname>GET Agreement info From Tera</shortname>
+	<description>GET Agreement info From Tera</description>
+	<url>/tera/agr/info/tera2</url>
+	<authentication>user</authentication>
+	<format default="json"></format>
+	<family>tera</family>
+</webscript>

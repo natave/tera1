@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+  xsi:schemaLocation="
+  http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+  http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd">    
+
+	<bean id="itsDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${db.driver}"/>
+		<property name="url" value="${db.url}"/>
+		<property name="username" value="${db.username}"/>
+		<property name="password" value="${db.password}"/>
+	</bean>
+
+	<!-- <tx:annotation-driven transaction-manager="itsTransactionManager"/> -->
+
+   <!--  <bean id="itsTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="itsDataSource" />
+    </bean> -->
+    
+    
+    
+    
+    
+    <!-- <mybatis:scan base-package="com.its.dms.mybatis.mappers" /> -->
+    
+    
+    <bean id="itsSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="itsDataSource" />
+        <property name="typeAliasesPackage" value="com.its.tera.model.*" />     
+        <property name="mapperLocations" value="classpath:com/its/tera/mybatis/mappers/*.xml" />
+    </bean>
+    
+    <bean id="itsSqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="itsSqlSessionFactory" />
+	</bean>
+	
+	<!-- mappers -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.its.chancellery.mybatis.mappers" />
+		<property name="sqlSessionFactory" ref="itsSqlSessionFactory" />
+		<property name="sqlSessionTemplate" ref="itsSqlSessionTemplate" />
+	</bean>
+  
+    
+	
+	<bean id="corrTypeMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.its.tera.mybatis.mappers.CorrTypeMapper" />
+		<property name="sqlSessionFactory" ref="itsSqlSessionFactory" />
+	</bean>
+	
+	<bean id="currencyMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.its.tera.mybatis.mappers.CurrencyMapper" />
+		<property name="sqlSessionFactory" ref="itsSqlSessionFactory" />
+	</bean>
+	
+	<bean id="tempTableMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.its.tera.mybatis.mappers.TempTableMapper" />
+		<property name="sqlSessionFactory" ref="itsSqlSessionFactory" />
+	</bean>
+	
+	<bean id="clientsTempTableMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.its.tera.mybatis.mappers.ClientsTempTableMapper" />
+		<property name="sqlSessionFactory" ref="itsSqlSessionFactory" />
+	</bean>
+	
+	<bean id="usersTempTableMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.its.tera.mybatis.mappers.UsersTempTableMapper" />
+		<property name="sqlSessionFactory" ref="itsSqlSessionFactory" />
+	</bean>
+	
+	<bean id="branchMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.its.tera.mybatis.mappers.BranchMapper" />
+		<property name="sqlSessionFactory" ref="itsSqlSessionFactory" />
+	</bean>	
+	
+	<bean id="clientCodesMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.its.tera.mybatis.mappers.ClientCodesMapper" />
+		<property name="sqlSessionFactory" ref="itsSqlSessionFactory" />
+	</bean>	
+	
+    
+
+	<bean id="dbServiceBean" class="com.its.tera.mybatis.service.DBServiceBean">
+        <property name="corrTypeMapper" ref="corrTypeMapper" />
+        <property name="currencyMapper" ref="currencyMapper" />
+        <property name="tempTableMapper" ref="tempTableMapper" />
+        <property name="clientsTempTableMapper" ref="clientsTempTableMapper" />
+        <property name="usersTempTableMapper" ref="usersTempTableMapper" />
+       	<property name="branchMapper" ref="branchMapper" />
+       	<property name="clientCodesMapper" ref="clientCodesMapper" />
+	</bean>
+</beans>

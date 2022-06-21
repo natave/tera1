@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model name="ksb-cont:itsContentModel" xmlns="http://www.alfresco.org/model/dictionary/1.0">
+
+	<description>KSB Content Model</description>
+	<author>ITS</author>
+	<version>1.0</version>
+
+	<imports>
+		<!-- Import Alfresco Dictionary Definitions -->
+		<import uri="http://www.alfresco.org/model/dictionary/1.0"
+			prefix="d" />
+
+		<!-- Import Alfresco Content Domain Model Definitions -->
+		<import uri="http://www.alfresco.org/model/content/1.0" prefix="cm" />
+		<import uri="http://www.alfresco.org/model/system/1.0" prefix="sys" />
+	</imports>
+
+	<namespaces>
+		<namespace uri="http://www.its.ge/model/content/base/ksb/1.0"
+			prefix="ksb-cont" />
+	</namespaces>
+
+	<constraints>
+	</constraints>
+
+
+	<types>	
+	
+		<type name="ksb-cont:clientFolder">
+			<title>Client Folder</title>
+			<parent>cm:folder</parent>
+			<mandatory-aspects>
+				<aspect>ksb-cont:clientInfo</aspect>
+				<!-- <aspect>ksb-cont:agreementNums</aspect> -->			
+			</mandatory-aspects>
+		</type>
+			
+		<type name="ksb-cont:genAgreementFolder">
+			<title>General Agreement Folder</title>
+			<parent>cm:folder</parent>
+			<mandatory-aspects>
+				<aspect>ksb-cont:clientInfo</aspect>
+				<aspect>ksb-cont:genAgreementProps</aspect>
+			</mandatory-aspects>
+		</type>
+		
+		<type name="ksb-cont:agreementFolder">
+			<title>Agreement Folder</title>
+			<parent>cm:folder</parent>
+			<mandatory-aspects>
+				<aspect>ksb-cont:clientInfo</aspect>
+				<aspect>ksb-cont:agreementProps</aspect>
+			</mandatory-aspects>
+		</type>
+		
+		<type name="ksb-cont:ordinaryFolder">
+			<title>Ordinary Folder</title>
+			<parent>cm:folder</parent>
+			<mandatory-aspects>
+				<aspect>ksb-cont:clientInfo</aspect>
+			</mandatory-aspects>
+		</type>
+		
+		<type name="ksb-cont:legalDocFolder">
+			<title>Legal Document Folder</title>
+			<parent>cm:folder</parent>
+			<mandatory-aspects>
+				<aspect>ksb-cont:clientInfo</aspect>
+			</mandatory-aspects>
+		</type>
+		
+		
+
+		<!--  -->
+		<type name="ksb-cont:creditDoc">
+			<title>Credit Document</title>
+			<parent>cm:content</parent>
+			<properties>
+				<property name="ksb-cont:registerNumber">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+				</property>				
+				<property name="ksb-cont:correspondenceType">
+					<type>d:text</type>
+				</property>				
+				<property name="ksb-cont:description">
+					<type>d:text</type>
+				</property>				
+				<property name="ksb-cont:isVIP">
+					<type>d:boolean</type>
+					<default>false</default>
+				</property>
+			</properties>
+			<mandatory-aspects>
+				<aspect>ksb-cont:clientInfo</aspect>
+			</mandatory-aspects>
+		</type>	
+				
+
+	</types>
+
+	<aspects>
+
+		<!-- Additional info -->
+		<aspect name="ksb-cont:clientInfo">
+			<properties>
+				<property name="ksb-cont:registerDate">
+					<type>d:date</type>
+				</property>
+				<property name="ksb-cont:creatorUser">
+					<type>d:text</type>
+				</property>
+				<property name="ksb-cont:clientCode">
+					<type>d:text</type>
+				</property>
+				<property name="ksb-cont:clientID">
+					<type>d:text</type>
+				</property>
+				<property name="ksb-cont:clientName">
+					<type>d:text</type>
+				</property>
+			</properties>
+		</aspect>
+		
+		
+		<aspect name="ksb-cont:genAgreementProps">
+			<properties>
+				<property name="ksb-cont:gAgreementId">
+					<type>d:text</type>
+				</property>
+				<property name="ksb-cont:gAgreementNumber">
+					<type>d:text</type>
+				</property>
+				<property name="ksb-cont:gAgreementAmount">
+					<type>d:text</type>
+				</property>
+				<property name="ksb-cont:gAgreementCurrency">
+					<type>d:text</type>
+				</property>
+				<property name="ksb-cont:gAgreementDate">
+					<type>d:date</type>
+				</property>
+			</properties>
+		</aspect>
+		
+		<aspect name="ksb-cont:agreementProps">
+			<properties>
+				<property name="ksb-cont:agreementId">
+					<type>d:text</type>
+				</property>
+				<property name="ksb-cont:agreementNumber">
+					<type>d:text</type>
+				</property>
+				<property name="ksb-cont:agreementAmount">
+					<type>d:text</type>
+				</property>
+				<property name="ksb-cont:agreementCurrency">
+					<type>d:text</type>
+				</property>
+				<property name="ksb-cont:agreementProduct">
+					<type>d:text</type>
+				</property>
+				<property name="ksb-cont:agreementDate">
+					<type>d:date</type>
+				</property>
+			</properties>
+		</aspect>
+
+		
+		
+		<!-- <aspect name="ksb-cont:agreementNums">
+			<properties>
+				<property name="ksb-cont:gAgreementNums">
+					<type>d:text</type>
+					<multiple>true</multiple>
+				</property>	
+				<property name="ksb-cont:agreementNums">
+					<type>d:text</type>
+					<multiple>true</multiple>
+				</property>
+			</properties>
+		</aspect> -->
+		
+		<aspect name="ksb-cont:itemIsEmpty">
+			<properties>
+				<property name="ksb-cont:itemIsEmpty">
+					<type>d:boolean</type>
+					<default>true</default>
+				</property>
+			</properties>			
+		</aspect>
+		
+		<aspect name="ksb-cont:clientIsVIP">
+			<properties>
+				<property name="ksb-cont:clientIsVIP">
+					<type>d:boolean</type>
+					<default>false</default>
+				</property>
+			</properties>
+		</aspect>
+		
+
+
+
+		<!-- ასოცირებული დოკუმენტები (mnishvnelovani) -->
+		<aspect name="ksb-cont:associatedFiles">
+			<associations>
+				<association name="ksb-cont:associatedFiles">
+					<title>Associated Files</title>
+					<source>
+						<mandatory>false</mandatory>
+						<many>true</many>
+					</source>
+					<target>
+						<class>cm:content</class>
+						<mandatory>false</mandatory>
+						<many>true</many>
+					</target>
+				</association>
+			</associations>
+		</aspect>
+		
+				
+		
+		<aspect name="ksb-cont:transformed"/>
+		
+		
+		
+		
+		<aspect name="ksb-cont:legalDocs"/>
+		
+		
+		
+		<aspect name="ksb-cont:branch">
+			<properties>
+				<property name="ksb-cont:branch">
+					<type>d:text</type>
+				</property>
+			</properties>
+		</aspect>
+		
+		
+		
+		<aspect name="ksb-cont:genAgrDocProps">
+			<properties>
+				<property name="ksb-cont:gAgrDocId">
+					<type>d:text</type>
+				</property>
+				<property name="ksb-cont:gAgrDocNumber">
+					<type>d:text</type>
+				</property>
+			</properties>
+		</aspect>
+		
+		<aspect name="ksb-cont:agrDocProps">
+			<properties>
+				<property name="ksb-cont:agrDocId">
+					<type>d:text</type>
+				</property>
+				<property name="ksb-cont:agrDocNumber">
+					<type>d:text</type>
+				</property>
+			</properties>
+		</aspect>
+		
+		
+		
+		<aspect name="ksb-cont:assocGenAgrs">
+			<associations>
+				<association name="ksb-cont:assocGenAgrs">
+					<title>Associated General Agreements</title>
+					<source>
+						<mandatory>false</mandatory>
+						<many>true</many>
+					</source>
+					<target>
+						<class>cm:folder</class>
+						<mandatory>false</mandatory>
+						<many>true</many>
+					</target>
+				</association>
+			</associations>
+		</aspect>
+		
+		
+		<aspect name="ksb-cont:assocGenChildAgrs">
+			<associations>
+				<association name="ksb-cont:assocGenChildAgrs">
+					<title>Associated General Agreement's children</title>
+					<source>
+						<mandatory>false</mandatory>
+						<many>true</many>
+					</source>
+					<target>
+						<class>cm:folder</class>
+						<mandatory>false</mandatory>
+						<many>true</many>
+					</target>
+				</association>
+			</associations>
+		</aspect>
+		
+		
+		<aspect name="ksb-cont:assocAgrs">
+			<associations>
+				<association name="ksb-cont:assocAgrs">
+					<title>Associated Agreements</title>
+					<source>
+						<mandatory>false</mandatory>
+						<many>true</many>
+					</source>
+					<target>
+						<class>cm:folder</class>
+						<mandatory>false</mandatory>
+						<many>true</many>
+					</target>
+				</association>
+			</associations>
+		</aspect>
+		
+		<aspect name="ksb-cont:assocLegals">
+			<associations>
+				<association name="ksb-cont:assocLegals">
+					<title>Associated Legal Documents</title>
+					<source>
+						<mandatory>false</mandatory>
+						<many>true</many>
+					</source>
+					<target>
+						<class>cm:folder</class>
+						<mandatory>false</mandatory>
+						<many>true</many>
+					</target>
+				</association>
+			</associations>
+		</aspect>
+		
+		
+
+	</aspects>
+
+</model>

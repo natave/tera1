@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<webscript>
+	<shortname>Update Doc Content2</shortname>
+	<description>Update Doc Content2</description>
+	<url>/tera/doc/update/content2</url>
+	<!-- turn off the multipart formdata processing -->
+	<formdata multipart-processing="false" />
+	<authentication>user</authentication>
+	<format default="json"></format>
+	<family>tera</family>
+</webscript>
